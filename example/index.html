@@ -3,6 +3,7 @@
 <head>
 	<script src="vendor/moment.js"></script>
 	<script src="../lib/moment-timer.js"></script>
+	<script src="../node_modules/moment-duration-format/lib/moment-duration-format.js"></script>
 </head>
 
 <body>
@@ -18,11 +19,32 @@
 
 	<hr>
 
-	<h1>Example of Timeout.</h1>
+	<h1>Example of Counter.</h1>
 	<p>
 
 	</p>
 
+	<div id="counter" style="border: 1px solid black;">
+		<div id="timeoutTimer"></div>
+		<script>
+		var bool = false;
+			var counterContainer = document.getElementById("counter");
+			var startTick = new Date().getTime();
+			var clock = moment.duration(99, "seconds").format("h:mm:ss");
+			console.log(clock);
+			var counter = moment.duration(99, "seconds").timer({
+					loop: false
+				},
+				function() {
+					counterContainer.innerHTML += "time is "
+					+ (startTick)
+					+ "<br>";
+				});
+
+
+		</script>
+	</div>
+	<h1>Example of Timer.</h1>
 	<div id="timeout" style="border: 1px solid black;">
 		<div id="timeoutTimer"></div>
 		<script>
@@ -31,19 +53,18 @@
 			var startTick = new Date().getTime();
 			var timeout = moment.duration(1000).timer({
 					loop: false
-				}, 
-				function() { 
-					timeoutContainer.innerHTML += "Callback fired " 
-					+ (new Date().getTime() - startTick) 
+				},
+				function() {
+					timeoutContainer.innerHTML += "Callback fired "
+					+ (new Date().getTime() - startTick)
 					+ "ms after script was started.<br>";
 				});
 
-			
+
 		</script>
 	</div>
 
 	<hr>
-
 	<h1>Example of Interval.</h1>
 	<p>
 
@@ -56,15 +77,17 @@
 			var startTick = new Date().getTime();
 			var interval = moment.duration(1, "seconds").timer({
 					loop: true,
-					wait: 2500,
+					wait: 1000,
 					executeAfterWait: true
-				}, 
-				function() { 
-					intervalContainer.innerHTML += "Callback fired " 
-					+ (new Date().getTime() - startTick) 
-					+ "ms after script was started.<br>"; 
+				},
+				function() {
+					intervalContainer.innerHTML += "Callback fired "
+					+ (new Date().getTime() - startTick)
+					+ "ms after script was started.<br>";
 				});
 		</script>
 	</div>
+
+
 </body>
 </html>
